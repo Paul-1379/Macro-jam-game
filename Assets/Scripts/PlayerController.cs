@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    
     [Header("Movement")]
     [SerializeField] private float speed;
     [SerializeField] private float maxSpeed;
@@ -18,9 +18,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float mirrorRotSpeed;
     [SerializeField, Range(0f, 1f)] private float mirrorMovementDamping;
     [SerializeField, Range(0f, 1f)] private float mirrorRotDamping;
-    
+    [FormerlySerializedAs("_dustParticles")]
+    [Header("Particules")]
+    [SerializeField] private ParticleSystem dustParticles;
     private float _currentXMovement;
-    private bool _isGrounded;
+
+    private bool IsGrounded
+    {
+        get
+        {
+            UpdateGroundCheck();
+            return _isGrounded;
+        }
+    }
+    private  bool _isGrounded;
     private bool _mirrorMode;
     private Vector2 _currentMirrorMovement;
     private float _currentMirrorRotation;
@@ -72,9 +83,12 @@ public class PlayerController : MonoBehaviour
 
     private void ApplyXMovement()
     {
-        if (_rb.linearVelocity.x < maxSpeed)
+        if (!(_rb.linearVelocity.x < maxSpeed)) return;
+        _rb.AddForce(Vector2.right * (_currentXMovement * speed));
+        UpdateGroundCheck();
+        if (IsGrounded)
         {
-            _rb.AddForce(Vector2.right * (_currentXMovement * speed));
+            dustParticles.Play();
         }
     }
     private void UpdateGroundCheck()
@@ -96,7 +110,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!context.performed) return;
         UpdateGroundCheck();
-        if (_isGrounded)
+        if (IsGrounded)
         {
             Jump();
         }

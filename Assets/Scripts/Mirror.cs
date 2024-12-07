@@ -23,10 +23,11 @@ public class Mirror : MonoBehaviour
     [HideInInspector]
     public bool IsEnabled
     {
-        get => IsEnabled;
-        set => ChangeActivationObjectsStates(value);
+        get => _isEnabled;
+        set { ChangeActivationObjectsStates(value); _isEnabled = value; }
     }
 
+    private bool _isEnabled;
     private void Awake()
     {
         _duplicatedObjects = new List<GameObject>();
