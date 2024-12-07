@@ -101,6 +101,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!context.performed) return;
         _mirrorMode = !_mirrorMode;
+        mirror.IsEnabled = _mirrorMode;
     }
 
     public void OnMirrorRotation(InputAction.CallbackContext context)
