@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     
     [Header("Movement")]
     [SerializeField] private float speed;
+    [SerializeField] private float maxSpeed;
     [SerializeField] private float jumpForce;
     [SerializeField] private BoxCollider2D groundCheck;
     [SerializeField] private LayerMask groundLayerMask;
@@ -71,7 +72,10 @@ public class PlayerController : MonoBehaviour
 
     private void ApplyXMovement()
     {
-        _rb.AddForce(Vector2.right * (_currentXMovement * speed));
+        if (_rb.linearVelocity.x < maxSpeed)
+        {
+            _rb.AddForce(Vector2.right * (_currentXMovement * speed));
+        }
     }
     private void UpdateGroundCheck()
     {
