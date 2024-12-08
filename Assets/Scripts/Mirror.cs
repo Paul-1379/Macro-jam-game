@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.Rendering.Universal;
 using Random = UnityEngine.Random;
 
 public class Mirror : MonoBehaviour
 {
+    [Header("Mirror")]
     [SerializeField] private Transform scanZoneEffect;
     [SerializeField] private BoxCollider2D scanZoneCollider;
     [SerializeField] private Transform duplicatingZoneEffectPrefab;
@@ -19,6 +20,9 @@ public class Mirror : MonoBehaviour
     [SerializeField] private AudioClip[] enablingClips;
     [SerializeField] private AudioSource duplicatingSource;
     [SerializeField] private AudioClip[] duplicatingClips;
+    [Header("Lights colors")]
+    [SerializeField] private Color scanColor;
+    [SerializeField] private Color duplicatingColor;
     
     private Vector2 _preEnabledUpVector;
     private List<GameObject> _duplicatedObjects;
@@ -55,11 +59,9 @@ public class Mirror : MonoBehaviour
 
     private void ChangeActivationObjectsStates(bool state)
     {
-        if (state)
-        {
-            enablingSource.clip = enablingClips[Random.Range(0, enablingClips.Length)];
-            enablingSource.Play();
-        }
+        enablingSource.clip = enablingClips[Random.Range(0, enablingClips.Length)];
+        enablingSource.Play();
+        
         foreach (var obj in enabledObjects)
         {
             obj.SetActive(state);
@@ -130,13 +132,14 @@ public class Mirror : MonoBehaviour
         DuplicateColliders();
         
         scanZoneEffect.parent = transform.parent;
-        CreateZoneEffect();
+        CreateZoneEffect(true);
     }
 
-    private Transform CreateZoneEffect()
+    private Transform CreateZoneEffect(bool duplicating = false)
     {
         var zoneEffect = Instantiate(duplicatingZoneEffectPrefab, transform.position, transform.rotation,
             mirrorZoneEffectParent);
+        zoneEffect.GetComponentInChildren<Light2D>().color = duplicating? duplicatingColor : scanColor;
         _zoneEffects.Add(zoneEffect.gameObject);
         return zoneEffect;
     }

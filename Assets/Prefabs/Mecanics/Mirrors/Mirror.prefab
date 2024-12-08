@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4941087628805833285}
   - component: {fileID: 3765414246255498542}
   - component: {fileID: 253931502707306853}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Mirror
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,6 +78,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 80d269799c63769499b55dc39390c4a7, type: 3}
   - {fileID: 8300000, guid: 5dc04a348e0736a48b2e736cc9954485, type: 3}
   - {fileID: 8300000, guid: 01430af190f17ae4da69b271d48a83f8, type: 3}
+  scanColor: {r: 0.2694014, g: 0.13416697, b: 0.6320754, a: 1}
+  duplicatingColor: {r: 0.6698113, g: 0.34044048, b: 0.06003024, a: 1}
 --- !u!212 &4513033104425712312
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -383,7 +385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5986477937982613069}
   - component: {fileID: 6463751781002579550}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Mirror visual outline
   m_TagString: CannotBeDuplicated
   m_Icon: {fileID: 0}
@@ -574,8 +576,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5213918260012385123, guid: 369ae42931a63704a8ad7f9a8c9738e4, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

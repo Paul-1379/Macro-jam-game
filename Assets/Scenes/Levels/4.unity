@@ -836,6 +836,10 @@ PrefabInstance:
       propertyPath: levelToLoadBuildIndex
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 5420204804284484736, guid: 98a14686d2515b14dbc389ec0ae5405a, type: 3}
+      propertyPath: levelTransitionParent
+      value: 
+      objectReference: {fileID: 915128075}
     - target: {fileID: 6928686385749067404, guid: 98a14686d2515b14dbc389ec0ae5405a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14.34
