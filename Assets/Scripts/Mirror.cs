@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
@@ -36,6 +37,16 @@ public class Mirror : MonoBehaviour
             scanZoneEffect.gameObject
         };
         IsEnabled = false;
+    }
+
+    private void OnEnable()
+    {
+        GameManager.Instance.mirrors.Add(this);
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.mirrors.Remove(this);
     }
 
     private void ChangeActivationObjectsStates(bool state)
