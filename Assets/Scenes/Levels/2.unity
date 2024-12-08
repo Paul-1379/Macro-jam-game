@@ -1467,6 +1467,10 @@ PrefabInstance:
       propertyPath: mirror
       value: 
       objectReference: {fileID: 1752484361}
+    - target: {fileID: 6508799563359256465, guid: 3d31e836e472cd44097f4819bcf80911, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6967100470868238717, guid: 02bf25cced878fa44acce9d722d0df9a, type: 3}
     - target: {fileID: 8615828710510800265, guid: 3d31e836e472cd44097f4819bcf80911, type: 3}
       propertyPath: m_Name
       value: Player

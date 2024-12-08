@@ -125,9 +125,9 @@ public class Mirror : MonoBehaviour
         {
             var go = coll.gameObject;
             DisableDuplicatedComponents(go);
-            var duplicatedObject = Instantiate(coll.gameObject);
+            var duplicatedObject = Instantiate(coll.gameObject, coll.transform.parent);
             _duplicatedObjects.Add(duplicatedObject);
-            Utilities.SetParent(duplicatedObject.transform, duplicatedObjectsParent);
+            duplicatedObject.transform.SetParent(duplicatedObjectsParent, true);
         }
     }
     private static void DisableDuplicatedComponents(GameObject go)
