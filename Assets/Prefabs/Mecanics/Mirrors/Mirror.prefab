@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4387dcf7fefe7e945867ba6ad7ffd629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duplicatedMaterial: {fileID: 2100000, guid: 51c755539a694604594b24ea3e47b24e, type: 2}
   scanZoneEffect: {fileID: 6626389399040920472}
   scanZoneCollider: {fileID: 8198614446703842339}
   duplicatingZoneEffectPrefab: {fileID: 8168073124601300419, guid: 369ae42931a63704a8ad7f9a8c9738e4, type: 3}

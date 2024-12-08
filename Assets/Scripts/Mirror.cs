@@ -2,10 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Mirror : MonoBehaviour
 {
+    [SerializeField] private Material duplicatedMaterial;
     [Header("Mirror")]
     [SerializeField] private Transform scanZoneEffect;
     [SerializeField] private BoxCollider2D scanZoneCollider;
@@ -152,10 +154,23 @@ public class Mirror : MonoBehaviour
             var go = coll.gameObject;
             DisableDuplicatedComponents(go);
             var duplicatedObject = Instantiate(coll.gameObject, coll.transform.parent);
+            
+            InitSpriteDuplicated(duplicatedObject);
+
             _duplicatedObjects.Add(duplicatedObject);
             duplicatedObject.transform.SetParent(duplicatedObjectsParent, true);
         }
     }
+
+    private void InitSpriteDuplicated(GameObject duplicatedObject)
+    {
+        if (!duplicatedObject.TryGetComponent<SpriteRenderer>(out var spriteRendererDuplicated)) return;
+        spriteRendererDuplicated.material = duplicatedMaterial;
+        var newColor = spriteRendererDuplicated.color;
+        newColor.a = .5f;
+        spriteRendererDuplicated.color = newColor;
+    }
+
     private static void DisableDuplicatedComponents(GameObject go)
     {
         if (go.TryGetComponent<Rigidbody2D>(out var rb))
