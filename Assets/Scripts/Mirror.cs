@@ -148,6 +148,10 @@ public class Mirror : MonoBehaviour
     {
         var zoneEffect = Instantiate(duplicatingZoneEffectPrefab, transform.position, transform.rotation,
             duplicating? duplicatedObjectsParent : transform);
+        if (!duplicating)
+        {
+            scanZoneCollider = zoneEffect.GetComponentInChildren<BoxCollider2D>();
+        }
         zoneEffect.GetComponentInChildren<Light2D>().color = duplicating? duplicatingColor : scanColor;
         _zoneEffects.Add(zoneEffect.gameObject);
         return zoneEffect;
