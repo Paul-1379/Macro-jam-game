@@ -15,7 +15,7 @@ public class Mirror : MonoBehaviour
     [SerializeField] private float maxAngle;
     [SerializeField] private bool canMove;
     
-    private Vector2 preEnabledUpVector;
+    private Vector2 _preEnabledUpVector;
     private List<GameObject> _duplicatedObjects;
     private List<GameObject> _zoneEffects;
     private bool _duplicatingEnabled;
@@ -35,6 +35,7 @@ public class Mirror : MonoBehaviour
         {
             scanZoneEffect.gameObject
         };
+        IsEnabled = false;
     }
 
     private void ChangeActivationObjectsStates(bool state)
@@ -57,14 +58,14 @@ public class Mirror : MonoBehaviour
         transform.RotateAround(transform.position, Vector3.back, angle);
         if (_duplicatingEnabled)
         {
-            if (Vector2.Angle(transform.up, preEnabledUpVector) > maxAngle)
+            if (Vector2.Angle(transform.up, _preEnabledUpVector) > maxAngle)
             {
                 transform.RotateAround(transform.position, Vector3.back, -angle);
             }
         }
         else
         {
-            preEnabledUpVector = transform.up;
+            _preEnabledUpVector = transform.up;
         }
     }
 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -13,7 +14,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private BoxCollider2D groundCheck;
     [SerializeField] private LayerMask groundLayerMask;
     [Header("Mirror")]
-    [SerializeField] private Mirror mirror;
     [SerializeField] private float mirrorMoveSpeed;
     [SerializeField] private float mirrorRotSpeed;
     [SerializeField, Range(0f, 1f)] private float mirrorMovementDamping;
@@ -21,6 +21,10 @@ public class PlayerController : MonoBehaviour
     [FormerlySerializedAs("_dustParticles")]
     [Header("Particules")]
     [SerializeField] private ParticleSystem dustParticles;
+
+    private List<Mirror> _mirrors;
+    private Mirror _currentMirrorSelected;
+    
     private float _currentXMovement;
 
     private bool IsGrounded
@@ -43,6 +47,9 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        
+        _mirrors = FindObjectsByType<Mirror>(FindObjectsInactive.Exclude, FindObjectsSortMode.None).ToList();
+        _currentMirrorSelected = _mirrors[0];
     }
 
     private void FixedUpdate()
@@ -59,8 +66,8 @@ public class PlayerController : MonoBehaviour
 
     private void ApplyMirrorMovementsAndRotation()
     {
-        mirror.Move(_currentMirrorMovement);
-        mirror.Rotate(_currentMirrorRotation);
+        _currentMirrorSelected.Move(_currentMirrorMovement);
+        _currentMirrorSelected.Rotate(_currentMirrorRotation);
 
         if (_mirrorMoveInput != Vector2.zero)
         {
@@ -119,9 +126,18 @@ public class PlayerController : MonoBehaviour
     {
         if (!context.performed) return;
         _mirrorMode = !_mirrorMode;
-        mirror.IsEnabled = _mirrorMode;
+        _currentMirrorSelected.IsEnabled = _mirrorMode;
     }
 
+    public void OnMirrorSelectToggle(InputAction.CallbackContext context)
+    {
+        if (context.performed && _mirrorMode)
+        {
+            _currentMirrorSelected.IsEnabled = false;
+            _currentMirrorSelected =  _mirrors[(_mirrors.IndexOf(_currentMirrorSelected) + 1) % _mirrors.Count];
+            _currentMirrorSelected.IsEnabled = true;
+        }
+    }
     public void OnMirrorRotation(InputAction.CallbackContext context)
     {
         _mirrorRotInput = context.performed? context.ReadValue<float>() : 0;
@@ -130,7 +146,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed && _mirrorMode)
         {
-            mirror.ToggleMode();
+            _currentMirrorSelected.ToggleMode();
         }
     }
     private void Jump()
