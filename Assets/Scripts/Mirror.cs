@@ -12,7 +12,6 @@ public class Mirror : MonoBehaviour
     [SerializeField] private Transform scanZoneEffect;
     [SerializeField] private BoxCollider2D scanZoneCollider;
     [SerializeField] private Transform duplicatingZoneEffectPrefab;
-    [SerializeField] private Transform mirrorZoneEffectParent;
     [SerializeField] private Transform duplicatedObjectsParent;
     [SerializeField] private GameObject[] enabledObjects;
     [SerializeField] private float maxAngle;
@@ -79,20 +78,28 @@ public class Mirror : MonoBehaviour
 
     public void Rotate(float angle)
     {
-        transform.RotateAround(transform.position, Vector3.back, angle);
+        transform.RotateAround(transform.position, Vector3.back, angle / 2);
+        duplicatedObjectsParent.RotateAround(duplicatedObjectsParent.position, Vector3.back, angle / 2);
         if (_duplicatingEnabled)
         {
-            if (Vector2.Angle(transform.up, _preEnabledUpVector) > maxAngle)
-            {
-                transform.RotateAround(transform.position, Vector3.back, -angle);
-            }
+            LimitAngle(-Mathf.Sign(angle));
         }
         else
         {
-            _preEnabledUpVector = transform.up;
+            _preEnabledUpVector = duplicatedObjectsParent.up;
         }
     }
 
+    private void LimitAngle(float rotateDir)
+    {
+        float currentAngle = Vector2.Angle(duplicatedObjectsParent.up, _preEnabledUpVector);
+        if (currentAngle > maxAngle)
+        {
+            float angleCorrection = (currentAngle - maxAngle) / 2 * rotateDir;
+            transform.RotateAround(transform.position, Vector3.back, angleCorrection);
+            duplicatedObjectsParent.RotateAround(duplicatedObjectsParent.position, Vector3.back, angleCorrection);
+        }
+    }
     public void ToggleMode()
     {
         if (!_duplicatingEnabled)
@@ -140,7 +147,7 @@ public class Mirror : MonoBehaviour
     private Transform CreateZoneEffect(bool duplicating = false)
     {
         var zoneEffect = Instantiate(duplicatingZoneEffectPrefab, transform.position, transform.rotation,
-            mirrorZoneEffectParent);
+            duplicating? duplicatedObjectsParent : transform);
         zoneEffect.GetComponentInChildren<Light2D>().color = duplicating? duplicatingColor : scanColor;
         _zoneEffects.Add(zoneEffect.gameObject);
         return zoneEffect;
