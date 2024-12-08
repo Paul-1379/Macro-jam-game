@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6135302944897713128}
   - component: {fileID: 4513033104425712312}
   - component: {fileID: 4941087628805833285}
+  - component: {fileID: 3765414246255498542}
+  - component: {fileID: 253931502707306853}
   m_Layer: 0
   m_Name: Mirror
   m_TagString: Untagged
@@ -58,6 +60,24 @@ MonoBehaviour:
   - {fileID: 8846424539030575040}
   maxAngle: 90
   canMove: 0
+  enablingSource: {fileID: 3765414246255498542}
+  enablingClips:
+  - {fileID: 8300000, guid: 0ffaff2194367474e8f5a760a5215f1f, type: 3}
+  - {fileID: 8300000, guid: 7217984e473e40843ab8abc1bfa7b294, type: 3}
+  - {fileID: 8300000, guid: 48438b2f6c320894bbc284cedad528c9, type: 3}
+  - {fileID: 8300000, guid: 0181d981b1a135b4eb00a880df4e9374, type: 3}
+  - {fileID: 8300000, guid: 3f55afdaf913f4841bfa05d1224684e4, type: 3}
+  - {fileID: 8300000, guid: 3baddea8d3d09ed41a811aa38b229bc4, type: 3}
+  - {fileID: 8300000, guid: a75ebae05206d1543b6f94d2e321fb48, type: 3}
+  - {fileID: 8300000, guid: a6f80517e2957d64e8da8ff08636ee31, type: 3}
+  - {fileID: 8300000, guid: 95edcae64d300e34f9f487a7517e9aef, type: 3}
+  duplicatingSource: {fileID: 253931502707306853}
+  duplicatingClips:
+  - {fileID: 8300000, guid: 9579f70a28784c04eb44ce7509237381, type: 3}
+  - {fileID: 8300000, guid: 6498eb52fbd8d144e922165a05b182b8, type: 3}
+  - {fileID: 8300000, guid: 80d269799c63769499b55dc39390c4a7, type: 3}
+  - {fileID: 8300000, guid: 5dc04a348e0736a48b2e736cc9954485, type: 3}
+  - {fileID: 8300000, guid: 01430af190f17ae4da69b271d48a83f8, type: 3}
 --- !u!212 &4513033104425712312
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -159,6 +179,200 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5.5, y: 1}
   m_EdgeRadius: 0
+--- !u!82 &3765414246255498542
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6653278818925878333}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &253931502707306853
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6653278818925878333}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8846424539030575040
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class Mirror : MonoBehaviour
 {
@@ -15,6 +14,11 @@ public class Mirror : MonoBehaviour
     [SerializeField] private GameObject[] enabledObjects;
     [SerializeField] private float maxAngle;
     [SerializeField] private bool canMove;
+    [Header("Sounds")]
+    [SerializeField] private AudioSource enablingSource;
+    [SerializeField] private AudioClip[] enablingClips;
+    [SerializeField] private AudioSource duplicatingSource;
+    [SerializeField] private AudioClip[] duplicatingClips;
     
     private Vector2 _preEnabledUpVector;
     private List<GameObject> _duplicatedObjects;
@@ -51,6 +55,11 @@ public class Mirror : MonoBehaviour
 
     private void ChangeActivationObjectsStates(bool state)
     {
+        if (state)
+        {
+            enablingSource.clip = enablingClips[Random.Range(0, enablingClips.Length)];
+            enablingSource.Play();
+        }
         foreach (var obj in enabledObjects)
         {
             obj.SetActive(state);
@@ -95,7 +104,7 @@ public class Mirror : MonoBehaviour
     private void DisableDuplicating()
     {
         _duplicatingEnabled = false;
-
+        
         ClearGameObjectList(ref _duplicatedObjects);
         ClearGameObjectList(ref _zoneEffects);
         
@@ -115,6 +124,9 @@ public class Mirror : MonoBehaviour
     {
         _duplicatingEnabled = true;
         
+        duplicatingSource.clip = duplicatingClips[Random.Range(0, duplicatingClips.Length)];
+        duplicatingSource.Play();
+        
         DuplicateColliders();
         
         scanZoneEffect.parent = transform.parent;
@@ -132,7 +144,7 @@ public class Mirror : MonoBehaviour
     {
         List<Collider2D> overlappingColliders = new();
         scanZoneCollider.Overlap(new ContactFilter2D().NoFilter(), overlappingColliders);
-        foreach (var coll in overlappingColliders.Where(coll => !coll.CompareTag("CannotBeDuplicated")))
+        foreach (var coll in overlappingColliders.Where(coll => !coll.CompareTag("CannotBeDuplicated") && coll.gameObject != gameObject))
         {
             var go = coll.gameObject;
             DisableDuplicatedComponents(go);

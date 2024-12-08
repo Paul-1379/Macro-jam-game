@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3a17ce2790b46748ad70a6aec7fbd63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toInstantiateAtStart: {fileID: 6703575387518238670, guid: 9ddfb78b7be4d0c448b1bbbfede521e9, type: 3}
   mirrors: []

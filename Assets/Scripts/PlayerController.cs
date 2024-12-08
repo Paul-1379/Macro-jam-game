@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
@@ -20,9 +20,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Range(0f, 1f)] private float mirrorMovementDamping;
     [SerializeField, Range(0f, 1f)] private float mirrorRotDamping;
     [FormerlySerializedAs("_dustParticles")]
-    [Header("Particules")]
+    [Header("Particles")]
     [SerializeField] private ParticleSystem dustParticles;
-
+    [Header("Sounds")]
+    [SerializeField] private AudioSource jumpSource;
+    [SerializeField] private AudioClip[] jumpClips;
 
     private Mirror CurrentMirrorSelected => GameManager.Instance.mirrors[_currentMirrorSelectedIndex];
 
@@ -151,10 +153,24 @@ public class PlayerController : MonoBehaviour
     }
     private void Jump()
     {
-        if (!_mirrorMode)
-        {
-            _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        }
+        if (_mirrorMode) return;
+        
+        _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
-    
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        PlayImpactSound();
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        PlayImpactSound();
+    }
+
+    private void PlayImpactSound()
+    {
+        jumpSource.clip = jumpClips[Random.Range(0, jumpClips.Length)];
+        jumpSource.Play();
+    }
 }
