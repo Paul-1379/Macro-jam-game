@@ -484,6 +484,11 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 24
+  waterLayerMask:
+    serializedVersion: 2
+    m_Bits: 16
+  airLinearDamping: 3
+  waterLinearDamping: 20
   mirrorMoveSpeed: 0.2
   mirrorRotSpeed: 2
   mirrorMovementDamping: 0.8
@@ -501,6 +506,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0f0d146251acc0d4bae7dcf5134ab3b8, type: 3}
   - {fileID: 8300000, guid: 11a7de49c5d90534eb75021dad2f1c97, type: 3}
   - {fileID: 8300000, guid: f5bf76314287a414a8ba9067c24d0d64, type: 3}
+  impactSoundLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &760754319209439005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,10 +551,6 @@ MonoBehaviour:
     m_ActionId: 351f2ccd-1f9f-44bf-9bec-d62ac5c5f408
     m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 6b444451-8a00-4d00-a97e-f47457f736a8
-    m_ActionName: 'Player/Look[/Mouse/delta]'
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6233712734561834203}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
@@ -578,10 +582,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 852140f2-7766-474d-8707-702459ba45f3
     m_ActionName: 'Player/Interact[/Keyboard/e]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 27c5f898-bc57-4ee1-8800-db469aca5fe3
-    m_ActionName: 'Player/Crouch[/Keyboard/c]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6233712734561834203}
@@ -618,10 +618,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b7230bb6-fc9b-4f52-8b25-f5e19cb2c2ba
     m_ActionName: 'Player/Next[/Keyboard/2]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 641cd816-40e6-41b4-8c3d-04687c349290
-    m_ActionName: 'Player/Sprint[/Keyboard/leftShift]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: c95b2375-e6d9-4b88-9c4c-c5e76515df4b

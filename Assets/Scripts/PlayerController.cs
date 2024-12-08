@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,6 +13,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce;
     [SerializeField] private BoxCollider2D groundCheck;
     [SerializeField] private LayerMask groundLayerMask;
+    [SerializeField] private LayerMask waterLayerMask;
+    [SerializeField] private float airLinearDamping;
+    [SerializeField] private float waterLinearDamping;
     [Header("Mirror")]
     [SerializeField] private float mirrorMoveSpeed;
     [SerializeField] private float mirrorRotSpeed;
@@ -25,6 +27,7 @@ public class PlayerController : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] private AudioSource jumpSource;
     [SerializeField] private AudioClip[] jumpClips;
+    [SerializeField] private LayerMask impactSoundLayerMask;
 
     private Mirror CurrentMirrorSelected => GameManager.Instance.mirrors[_currentMirrorSelectedIndex];
 
@@ -39,7 +42,18 @@ public class PlayerController : MonoBehaviour
             return _isGrounded;
         }
     }
+    private bool IsInWater
+    {
+        get
+        {
+            UpdateIsInWater();
+            return _isInWater;
+        }
+    }
+
     private  bool _isGrounded;
+    private bool _isInWater;
+    
     private bool _mirrorMode;
     private Vector2 _currentMirrorMovement;
     private float _currentMirrorRotation;
@@ -62,9 +76,15 @@ public class PlayerController : MonoBehaviour
         else
         {
             ApplyXMovement();
+            ApplyWaterEffects();
         }
     }
 
+    private void ApplyWaterEffects()
+    {
+        _rb.linearDamping = IsInWater ? waterLinearDamping : airLinearDamping;
+    }
+    
     private void ApplyMirrorMovementsAndRotation()
     {
         CurrentMirrorSelected.Move(_currentMirrorMovement);
@@ -109,6 +129,17 @@ public class PlayerController : MonoBehaviour
         };
         _isGrounded = groundCheck.Overlap(contactFilter, overlappingColliders) > 0;
     }
+    private void UpdateIsInWater()
+    {
+        List<Collider2D> overlappingColliders = new();
+        var contactFilter = new ContactFilter2D()
+        {
+            layerMask = waterLayerMask,
+            useTriggers = true,
+            useLayerMask = true
+        };
+        _isInWater = groundCheck.Overlap(contactFilter, overlappingColliders) > 0;
+    }
     public void OnMovement(InputAction.CallbackContext context)
     {
         _mirrorMoveInput = context.performed? context.ReadValue<Vector2>() : Vector2.zero;
@@ -118,7 +149,6 @@ public class PlayerController : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
-        UpdateGroundCheck();
         if (IsGrounded)
         {
             Jump();
@@ -160,16 +190,17 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        PlayImpactSound();
+        PlayImpactSound(other);
     }
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        PlayImpactSound();
+        PlayImpactSound(other);
     }
 
-    private void PlayImpactSound()
+    private void PlayImpactSound(Collision2D collision)
     {
+        if (!impactSoundLayerMask.Contains(collision.gameObject.layer)) return;
         jumpSource.clip = jumpClips[Random.Range(0, jumpClips.Length)];
         jumpSource.Play();
     }
