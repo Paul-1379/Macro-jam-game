@@ -102,7 +102,8 @@ public class PlayerController : MonoBehaviour
         var contactFilter = new ContactFilter2D()
         {
             layerMask = groundLayerMask,
-            useTriggers = true
+            useTriggers = true,
+            useLayerMask = true
         };
         _isGrounded = groundCheck.Overlap(contactFilter, overlappingColliders) > 0;
     }
