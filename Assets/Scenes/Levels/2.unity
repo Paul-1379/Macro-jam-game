@@ -543,7 +543,7 @@ BoxCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0.44, y: 0.44, z: 0.44, w: 0.24}
+    border: {x: 0.44, y: 0.44, z: 0.44, w: 0.61}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1.6, y: 1.6}
     newSize: {x: 4, y: 4}
@@ -931,7 +931,7 @@ GameObject:
   - component: {fileID: 1048300070}
   m_Layer: 0
   m_Name: Border left
-  m_TagString: Untagged
+  m_TagString: CannotBeDuplicated
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1172,7 +1172,7 @@ GameObject:
   - component: {fileID: 1800966988}
   m_Layer: 0
   m_Name: Right level switch trigger
-  m_TagString: Untagged
+  m_TagString: CannotBeDuplicated
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1252,7 +1252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelTransition: {fileID: 8209483580651192614, guid: 2026b180af1306d4ca0c0e5fa91d0550, type: 3}
   levelTransitionParent: {fileID: 915128075}
-  levelToLoadBuildIndex: 0
+  levelToLoadBuildIndex: 2
 --- !u!1 &1898406988
 GameObject:
   m_ObjectHideFlags: 0
@@ -1307,7 +1307,7 @@ BoxCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0.44, y: 0.44, z: 0.44, w: 0.24}
+    border: {x: 0.44, y: 0.44, z: 0.44, w: 0.61}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1.6, y: 1.6}
     newSize: {x: 15, y: 4}
