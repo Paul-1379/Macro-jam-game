@@ -92,13 +92,11 @@ public class Mirror : MonoBehaviour
 
     private void LimitAngle(float rotateDir)
     {
-        float currentAngle = Vector2.Angle(duplicatedObjectsParent.up, _preEnabledUpVector);
-        if (currentAngle > maxAngle)
-        {
-            float angleCorrection = (currentAngle - maxAngle) / 2 * rotateDir;
-            transform.RotateAround(transform.position, Vector3.back, angleCorrection);
-            duplicatedObjectsParent.RotateAround(duplicatedObjectsParent.position, Vector3.back, angleCorrection);
-        }
+        var currentAngle = Vector2.Angle(duplicatedObjectsParent.up, _preEnabledUpVector);
+        if (!(currentAngle > maxAngle)) return;
+        var angleCorrection = (currentAngle - maxAngle) / 2 * rotateDir;
+        transform.RotateAround(transform.position, Vector3.back, angleCorrection);
+        duplicatedObjectsParent.RotateAround(duplicatedObjectsParent.position, Vector3.back, angleCorrection);
     }
     public void ToggleMode()
     {
@@ -164,10 +162,19 @@ public class Mirror : MonoBehaviour
         {
             var go = coll.gameObject;
             DisableDuplicatedComponents(go);
+            
+            var duplicatedmirror = coll.gameObject.GetComponentInChildren<Mirror>();
+            if (duplicatedmirror)
+            {
+                if (duplicatedmirror._duplicatingEnabled)
+                {
+                    duplicatedmirror.ToggleMode();
+                }
+            }
             var duplicatedObject = Instantiate(coll.gameObject, coll.transform.parent);
             
             InitSpriteDuplicated(duplicatedObject);
-
+            
             _duplicatedObjects.Add(duplicatedObject);
             duplicatedObject.transform.SetParent(duplicatedObjectsParent, true);
         }
