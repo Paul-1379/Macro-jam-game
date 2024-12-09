@@ -27,8 +27,11 @@ public class WaterShapeController : MonoBehaviour
     public float spread = 0.006f;
     
     void OnValidate() {
-        // Clean waterpoints 
-        StartCoroutine(CreateWaves());
+        if (gameObject.activeInHierarchy)
+        {
+            // Clean waterpoints 
+            StartCoroutine(CreateWaves());
+        }
     }
     IEnumerator CreateWaves() {
         foreach (Transform child in wavePoints.transform) {

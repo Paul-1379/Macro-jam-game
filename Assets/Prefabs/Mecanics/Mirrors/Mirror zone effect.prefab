@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6634433679125778830}
   - component: {fileID: 6703909913429419504}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Mirror zone effect coll
   m_TagString: CannotBeDuplicated
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8168073124601300419}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Mirror zone effect
   m_TagString: CannotBeDuplicated
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 255498026810688708}
   - component: {fileID: 4157291721409738832}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
