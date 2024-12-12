@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour
     }
     public void OnMovement(InputAction.CallbackContext context)
     {
-        _mirrorMoveInput = context.performed? context.ReadValue<Vector2>() : Vector2.zero;
+        _mirrorRotInput = context.performed? context.ReadValue<Vector2>().x : 0;
             
         _currentXMovement = context.performed ? context.ReadValue<Vector2>().x : 0;
     }
@@ -169,10 +169,6 @@ public class PlayerController : MonoBehaviour
             _currentMirrorSelectedIndex =  (GameManager.Instance.mirrors.IndexOf(CurrentMirrorSelected) + 1) % GameManager.Instance.mirrors.Count;
             CurrentMirrorSelected.IsEnabled = true;
         }
-    }
-    public void OnMirrorRotation(InputAction.CallbackContext context)
-    {
-        _mirrorRotInput = context.performed? context.ReadValue<float>() : 0;
     }
     public void OnInteract(InputAction.CallbackContext context)
     {
